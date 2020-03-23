@@ -7,15 +7,24 @@ import java.util.Date;
 /**
  * Created by irconde on 2019-10-04.
  */
-public class Device extends DeviceListItem {
+public class Device {
     private String deviceId;
     private String name;
     private DeviceType deviceType;
     private Date lastConnection;
+    private Device.DeviceStatus deviceStatus;
+
+
+    public Device.DeviceStatus getDeviceStatus() {
+        return deviceStatus;
+    }
+
+    public void setDeviceStatus(Device.DeviceStatus deviceStatus) {
+        this.deviceStatus = deviceStatus;
+    }
 
     public Device(@NonNull String deviceId) {
         this.lastConnection = null;
-        this.isSection = false;
         this.deviceId = deviceId;
         this.name = "";
         this.deviceStatus = DeviceStatus.Linked;
@@ -23,7 +32,6 @@ public class Device extends DeviceListItem {
     }
 
     public Device(final Device device) {
-        isSection = device.isSection;
         deviceId = device.getDeviceId();
         name = device.getName();
         deviceStatus = device.getDeviceStatus();
@@ -66,12 +74,6 @@ public class Device extends DeviceListItem {
 
     public void setLastConnection(Date timeStamp) {
         this.lastConnection = timeStamp;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj != null && obj instanceof Device &&
-                deviceId.equals(((Device) obj).getDeviceId());
     }
 
     public enum DeviceType {
